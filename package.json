@@ -1,0 +1,26 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "sitemap": "node scripts/generate-sitemap.js"
+  },
+  "dependencies": {
+    "@fancyapps/ui": "^6.1.14",
+    "@tinymce/tinymce-react": "^6.3.0",
+    "aos": "^2.3.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.3",
+    "swiper": "^14.2.0",
+    "tinymce": "^8.9.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.2.2"
+  }
+}

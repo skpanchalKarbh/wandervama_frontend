@@ -1,0 +1,39 @@
+# Wanderama frontend - Apache config for a React (Vite) single-page app.
+# Place this file in the web root alongside index.html (it is auto-copied
+# into dist/ on every `npm run build` since it lives in frontend/public/).
+
+# ---- SPA routing ----
+# React Router handles URLs like /properties/xyz on the client side.
+# Without this, refreshing or directly visiting such a URL returns a
+# server 404 because no matching file/folder exists. This rewrites any
+# request that isn't a real file or directory back to index.html.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Don't rewrite actual files/folders (js, css, images, sitemap.xml, etc.)
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# ---- Gzip compression ----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ---- Caching ----
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
